@@ -1,33 +1,57 @@
-# 本周工作内容
+# Revit 接口示例
 
-* 对 Revit 接口实现初版
-* MVD 检查性能初步优化
+## Template
 
----
 
-## Revit
+Set[Value]='Pset_WallCommon' AND Property[Value]='IsExternal'
 
-* 可对从 Revit 传过来的信息进行检查
-* 可以从 MVD 中解析出部分 Revit 需要的关系
-> * 属性集
-> * 算量集
-> * 字段
 
----
+### Set
 
-## MVD 性能
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcPropertySet]  
+             -> Name
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcElementQuantity]  
+             -> Name
 
-检查对象：7 个 IfcWall，23 组 ConceptRoot，7 个 Requirement
+### Property
 
-<img src="./resources/180824-2.png" />
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcPropertySet]  
+             -> HasProperties [IfcSimpleProperty]  
+             -> Name
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcPropertySet]  
+             -> HasProperties [IfcPropertySingleValue]  
+             -> Name
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcPropertySet]  
+             -> HasProperties [IfcPropertyEnumeratedValue]  
+             -> Name
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcPropertySet]  
+             -> HasProperties [IfcPropertyEnumeratedValue]  
+             -> EnumerationReference [IfcPropertyEnumeration]  
+             -> Name
+* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+             -> RelatingPropertyDefinition [IfcElementQuantity]  
+             -> Quantities [IfcPhysicalSimpleQuantity]  
+             -> Name
 
-<img src="./resources/180824-1.png" />
+### 生成信息
 
----
+#### 属性集
+* Pset : Pset_WallCommon
+* Key : IsExternal
+* 实例属性
 
-## MVD 性能
+#### 算量集
+* Qset : Pset_WallCommon
+* Key : IsExternal
+* 实例属性
 
-检查对象：43 个 IfcWall，MVD 同上
-
-<img src="./resources/180824-3.png" />
-
+#### 关系
+* Rel : IsDefindBy [IfcRelDefinesByProperties]
+* FromAttribute : RelatedObjects
+* ToAttribute : RelatingPropertyDefinition
