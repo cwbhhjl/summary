@@ -3,47 +3,41 @@
 ## Template
 
 
-Set[Value]='Pset_WallCommon' AND Property[Value]='IsExternal'
-
-----
+    Set[Value]='Pset_WallCommon' AND Property[Value]='IsExternal'
 
 
 ### Set
 
-* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcPropertySet]  
-             -> Name
-* IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcElementQuantity]  
-             -> Name
-
-----
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcPropertySet]  
+                 -> Name
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcElementQuantity]  
+                 -> Name
 
 ### Property
 
-* `IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcPropertySet]  
-             -> HasProperties [IfcSimpleProperty]  
-             -> Name`
-* `IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcPropertySet]  
-             -> HasProperties [IfcPropertySingleValue]  
-             -> Name`
-* `IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcPropertySet]  
-             -> HasProperties [IfcPropertyEnumeratedValue]  
-             -> Name`
-* `IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcPropertySet]  
-             -> HasProperties [IfcPropertyEnumeratedValue]  
-             -> EnumerationReference [IfcPropertyEnumeration]  
-             -> Name`
-* `IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-             -> RelatingPropertyDefinition [IfcElementQuantity]  
-             -> Quantities [IfcPhysicalSimpleQuantity]  
-             -> Name`
-
-----
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcPropertySet]  
+                 -> HasProperties [IfcSimpleProperty]  
+                 -> Name
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcPropertySet]  
+                 -> HasProperties [IfcPropertySingleValue]  
+                 -> Name
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcPropertySet]  
+                 -> HasProperties [IfcPropertyEnumeratedValue]  
+                 -> Name
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcPropertySet]  
+                 -> HasProperties [IfcPropertyEnumeratedValue]  
+                 -> EnumerationReference [IfcPropertyEnumeration]  
+                 -> Name
+*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                 -> RelatingPropertyDefinition [IfcElementQuantity]  
+                 -> Quantities [IfcPhysicalSimpleQuantity]  
+                 -> Name
 
 ### 生成信息
 
