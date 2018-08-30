@@ -19,7 +19,7 @@
 ```
 
 ### Property
-
+```cpp
     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                -> RelatingPropertyDefinition [IfcPropertySet]  
                -> HasProperties [IfcSimpleProperty]  
@@ -40,11 +40,12 @@
                -> HasProperties [IfcPropertyEnumeratedValue]  
                -> EnumerationReference [IfcPropertyEnumeration]  
                -> Name
-               
+
     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                -> RelatingPropertyDefinition [IfcElementQuantity]  
                -> Quantities [IfcPhysicalSimpleQuantity]  
                -> Name
+```
 
 ### 生成信息
 
