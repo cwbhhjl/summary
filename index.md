@@ -2,18 +2,20 @@
 
 ## Template
 
-
+```php
     Set[Value]='Pset_WallCommon' AND Property[Value]='IsExternal'
-
+```
 
 ### Set
 
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcPropertySet]  
-                 -> Name
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcElementQuantity]  
-                 -> Name
+```c++
+     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                -> RelatingPropertyDefinition [IfcPropertySet]  
+                -> Name
+     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+                -> RelatingPropertyDefinition [IfcElementQuantity]  
+                -> Name
+```
 
 ### Property
 
