@@ -8,10 +8,11 @@
 
 ### Set
 
-```c++
+```csharp
      IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                 -> RelatingPropertyDefinition [IfcPropertySet]  
                 -> Name
+    
      IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                 -> RelatingPropertyDefinition [IfcElementQuantity]  
                 -> Name
