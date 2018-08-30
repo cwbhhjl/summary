@@ -8,7 +8,7 @@
 
 ### Set
 
-```csharp
+```java
      IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                 -> RelatingPropertyDefinition [IfcPropertySet]  
                 -> Name
@@ -20,27 +20,31 @@
 
 ### Property
 
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcPropertySet]  
-                 -> HasProperties [IfcSimpleProperty]  
-                 -> Name
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcPropertySet]  
-                 -> HasProperties [IfcPropertySingleValue]  
-                 -> Name
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcPropertySet]  
-                 -> HasProperties [IfcPropertyEnumeratedValue]  
-                 -> Name
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcPropertySet]  
-                 -> HasProperties [IfcPropertyEnumeratedValue]  
-                 -> EnumerationReference [IfcPropertyEnumeration]  
-                 -> Name
-*     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                 -> RelatingPropertyDefinition [IfcElementQuantity]  
-                 -> Quantities [IfcPhysicalSimpleQuantity]  
-                 -> Name
+    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+               -> RelatingPropertyDefinition [IfcPropertySet]  
+               -> HasProperties [IfcSimpleProperty]  
+               -> Name
+
+    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+               -> RelatingPropertyDefinition [IfcPropertySet]  
+               -> HasProperties [IfcPropertySingleValue]  
+               -> Name
+
+    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+               -> RelatingPropertyDefinition [IfcPropertySet]  
+               -> HasProperties [IfcPropertyEnumeratedValue]  
+               -> Name
+
+    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+               -> RelatingPropertyDefinition [IfcPropertySet]  
+               -> HasProperties [IfcPropertyEnumeratedValue]  
+               -> EnumerationReference [IfcPropertyEnumeration]  
+               -> Name
+               
+    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
+               -> RelatingPropertyDefinition [IfcElementQuantity]  
+               -> Quantities [IfcPhysicalSimpleQuantity]  
+               -> Name
 
 ### 生成信息
 
