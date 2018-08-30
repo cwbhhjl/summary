@@ -19,7 +19,7 @@
 ```
 
 ### Property
-```cpp
+```java
     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
                -> RelatingPropertyDefinition [IfcPropertySet]  
                -> HasProperties [IfcSimpleProperty]  
