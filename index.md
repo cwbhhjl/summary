@@ -1,68 +1,58 @@
-# Revit 接口示例
+# MVD 检查
 
-## Template
+## 实现了线程安全的类
 
-```php
-    Set[Value]='Pset_WallCommon' AND Property[Value]='IsExternal'
-```
+````csharp
+    reqs.AsParallel().ForAll(
+        requiremnt => result
+            .TryAdd(
+                requiremnt,
+                ValidationMVD(ifcEntity, modelViewUuid, requiremnt)
+                ));
+````
+----
 
-### Set
+## MVD 信息提取
 
-```java
-     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                -> RelatingPropertyDefinition [IfcPropertySet]  
-                -> Name
-    
-     IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-                -> RelatingPropertyDefinition [IfcElementQuantity]  
-                -> Name
-```
+````javascript
+    // ...
+    "属性集": [
+        { "Key": "桥架材质", "AttributePosition": "类型属性" },
+        { "Key": "设备类型", "AttributePosition": "实例属性" }
+    ],
+    "RelRequirements": [
+    {
+        "关系": "IsTypedBy", "类型": "IfcRelDefinesByType",
+        "FromAttribute": "RelatedObjects",
+        "ToAttribute": "RelatingType",
+        "RelatedEntityType": "IFCCableCarrierFitting"
+    },
+    {
+        "关系": "IsDefinedBy", "类型": "IfcRelDefinesByProperties",
+        "FromAttribute": "RelatedObjects",
+        "ToAttribute": "RelatingPropertyDefinition",
+        "RelatedEntityType": "IFCCableCarrierFitting"
+    }
+    // ...
+````
+----
 
-### Property
-```java
-    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-               -> RelatingPropertyDefinition [IfcPropertySet]  
-               -> HasProperties [IfcSimpleProperty]  
-               -> Name
+## 性能
 
-    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-               -> RelatingPropertyDefinition [IfcPropertySet]  
-               -> HasProperties [IfcPropertySingleValue]  
-               -> Name
+<img src="./resources/180921-1.png" />
 
-    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-               -> RelatingPropertyDefinition [IfcPropertySet]  
-               -> HasProperties [IfcPropertyEnumeratedValue]  
-               -> Name
+140 万次 TemplateRule 检查：5 分钟
 
-    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-               -> RelatingPropertyDefinition [IfcPropertySet]  
-               -> HasProperties [IfcPropertyEnumeratedValue]  
-               -> EnumerationReference [IfcPropertyEnumeration]  
-               -> Name
+* 构造内部数据结构 : 40 %
+> * 访问IFC属性 : 20 %
+* 从内部数据结构中访问属性 : 30 %
+* 其他 : 30 %
 
-    IfcProduct -> IsDefinedBy [IfcRelDefinesByProperties]  
-               -> RelatingPropertyDefinition [IfcElementQuantity]  
-               -> Quantities [IfcPhysicalSimpleQuantity]  
-               -> Name
-```
+信息提取：
 
-### 生成信息
+````xml
+    <TemplateRule Parameters="Name_28[Value]='构件分类编码' AND NominalValue_29[Value]=reg'^10.05.10.35'" />
+````
 
-#### 属性集
+正则表达式生成匹配 : 30%
 
-* `Pset : Pset_WallCommon`
-* `Key : IsExternal`
-* `实例属性`
-
-#### 算量集
-
-* `Qset : Pset_WallCommon`
-* `Key : IsExternal`
-* `实例属性`
-
-#### 关系
-
-* `Rel : IsDefindBy [IfcRelDefinesByProperties]`
-* `FromAttribute : RelatedObjects`
-* `ToAttribute : RelatingPropertyDefinition`

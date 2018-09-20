@@ -25,7 +25,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Revit 接口示例</title>
+    <title>MVD 检查</title>
     <!-- Styles -->
     
     <style type="text/css" media="print">
@@ -1657,12 +1657,16 @@ div.slide div.presenter_notes {
         <div class="slide has_code">
           <div class="inner">
             
-            <header><h1>Revit 接口示例</h1></header>
+            <header><h1>MVD 检查</h1></header>
             
             
-            <section><h2>Template</h2>
-<div class="highlight"><pre><span></span><span class="nx">Set</span><span class="p">[</span><span class="nx">Value</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;Pset_WallCommon&#39;</span> <span class="k">AND</span>
-<span class="nx">Property</span><span class="p">[</span><span class="nx">Value</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;IsExternal&#39;</span>
+            <section><h3>实现了线程安全的类</h3>
+<div class="highlight"><pre><span></span><span class="n">reqs</span><span class="p">.</span><span class="n">AsParallel</span><span class="p">().</span><span class="n">ForAll</span><span class="p">(</span>
+    <span class="n">requiremnt</span> <span class="p">=&gt;</span> <span class="n">result</span>
+        <span class="p">.</span><span class="n">TryAdd</span><span class="p">(</span>
+            <span class="n">requiremnt</span><span class="p">,</span>
+            <span class="n">ValidationMVD</span><span class="p">(</span><span class="n">ifcEntity</span><span class="p">,</span> <span class="n">modelViewUuid</span><span class="p">,</span> <span class="n">requiremnt</span><span class="p">)</span>
+            <span class="p">));</span>
 </pre></div>
 </section>
             
@@ -1680,7 +1684,7 @@ div.slide div.presenter_notes {
             </aside>
             
             <aside class="page_number">
-              1/5
+              1/3
             </aside>
           </footer>
         </div>
@@ -1691,164 +1695,28 @@ div.slide div.presenter_notes {
         <div class="slide has_code">
           <div class="inner">
             
-            <header><h3>Set</h3></header>
+            <header><h2>MVD 信息提取</h2></header>
             
             
-            <section><div class="highlight"><pre><span></span> <span class="n">IfcProduct</span> <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span>
-<span class="na">               [IfcRelDefinesByProperties]</span>  
-            <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span>
-<span class="na">               [IfcPropertySet]</span>  
-            <span class="p">-&gt;</span> <span class="n">Name</span>
-
- <span class="n">IfcProduct</span> <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span>
-<span class="na">               [IfcRelDefinesByProperties]</span>  
-            <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span>
-<span class="na">               [IfcElementQuantity]</span>  
-            <span class="p">-&gt;</span> <span class="n">Name</span>
-</pre></div>
-</section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            <aside class="source">
-              Source: <a href="index.md">index.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              2/5
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: index.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_code">
-          <div class="inner">
-            
-            <header><h3>Property</h3></header>
-            
-            
-            <section><div class="highlight"><pre><span></span><span class="na">[IfcProduct]</span>
-  <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span> <span class="p">[</span><span class="n">IfcRelDefinesByProperties</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span> <span class="p">[</span><span class="n">IfcPropertySet</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">HasProperties</span> <span class="p">[</span><span class="n">IfcSimpleProperty</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">Name</span>
-
-<span class="na">[IfcProduct]</span>
-  <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span> <span class="p">[</span><span class="n">IfcRelDefinesByProperties</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span> <span class="p">[</span><span class="n">IfcPropertySet</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">HasProperties</span> <span class="p">[</span><span class="n">IfcPropertySingleValue</span><span class="p">]</span>  
-  <span class="p">-&gt;</span> <span class="n">Name</span>
-
-<span class="na">[IfcProduct]</span> 
-  <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span> <span class="p">[</span><span class="n">IfcRelDefinesByProperties</span><span class="p">]</span>
-  <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span> <span class="p">[</span><span class="n">IfcPropertySet</span><span class="p">]</span>
-  <span class="p">-&gt;</span> <span class="n">HasProperties</span> <span class="p">[</span><span class="n">IfcPropertyEnumeratedValue</span><span class="p">]</span>
-  <span class="p">-&gt;</span> <span class="n">Name</span>
-</pre></div>
-</section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            <aside class="source">
-              Source: <a href="index.md">index.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              3/5
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: index.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_code">
-          <div class="inner">
-            
-            <header><h3>Property</h3></header>
-            
-            
-            <section><div class="highlight"><pre><span></span><span class="n">IfcProduct</span> <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span>
-<span class="na">              [IfcRelDefinesByProperties]</span>  
-           <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span>
-<span class="na">              [IfcPropertySet]</span>  
-           <span class="p">-&gt;</span> <span class="n">HasProperties</span>
-<span class="na">              [IfcPropertyEnumeratedValue]</span>  
-           <span class="p">-&gt;</span> <span class="n">EnumerationReference</span>
-<span class="na">              [IfcPropertyEnumeration]</span>  
-           <span class="p">-&gt;</span> <span class="n">Name</span>
-
-<span class="n">IfcProduct</span> <span class="p">-&gt;</span> <span class="n">IsDefinedBy</span>
-<span class="na">              [IfcRelDefinesByProperties]</span>  
-           <span class="p">-&gt;</span> <span class="n">RelatingPropertyDefinition</span>
-<span class="na">              [IfcElementQuantity]</span>  
-           <span class="p">-&gt;</span> <span class="n">Quantities</span>
-<span class="na">              [IfcPhysicalSimpleQuantity]</span>  
-           <span class="p">-&gt;</span> <span class="n">Name</span>
-</pre></div>
-</section>
-            
-          </div>
-          <div class="presenter_notes">
-            <header><h1>Notes</h1></header>
-            <section>
-            
-            </section>
-          </div>
-          <footer>
-            
-            <aside class="source">
-              Source: <a href="index.md">index.md</a>
-            </aside>
-            
-            <aside class="page_number">
-              4/5
-            </aside>
-          </footer>
-        </div>
-      </div>
-      
-      <!-- slide source: index.md -->
-      <div class="slide-wrapper">
-        <div class="slide has_code">
-          <div class="inner">
-            
-            <header><h3>生成信息</h3></header>
-            
-            
-            <section><div class="highlight"><pre><span></span><span class="nx">属性集</span> <span class="p">{</span>
-    <span class="nx">Pset</span> <span class="o">:</span> <span class="nx">Pset_WallCommon</span><span class="p">,</span>
-    <span class="nx">Key</span> <span class="o">:</span> <span class="nx">IsExternal</span><span class="p">,</span>
-    <span class="nx">实例属性</span>
+            <section><div class="highlight"><pre><span></span><span class="c1">// ...</span>
+<span class="s2">&quot;属性集&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;桥架材质&quot;</span><span class="p">,</span> <span class="s2">&quot;AttributePosition&quot;</span><span class="o">:</span> <span class="s2">&quot;类型属性&quot;</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;设备类型&quot;</span><span class="p">,</span> <span class="s2">&quot;AttributePosition&quot;</span><span class="o">:</span> <span class="s2">&quot;实例属性&quot;</span> <span class="p">}</span>
+<span class="p">],</span>
+<span class="s2">&quot;RelRequirements&quot;</span><span class="o">:</span> <span class="p">[</span>
+<span class="p">{</span>
+    <span class="s2">&quot;关系&quot;</span><span class="o">:</span> <span class="s2">&quot;IsTypedBy&quot;</span><span class="p">,</span> <span class="s2">&quot;类型&quot;</span><span class="o">:</span> <span class="s2">&quot;IfcRelDefinesByType&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FromAttribute&quot;</span><span class="o">:</span> <span class="s2">&quot;RelatedObjects&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToAttribute&quot;</span><span class="o">:</span> <span class="s2">&quot;RelatingType&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RelatedEntityType&quot;</span><span class="o">:</span> <span class="s2">&quot;IFCCableCarrierFitting&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="s2">&quot;关系&quot;</span><span class="o">:</span> <span class="s2">&quot;IsDefinedBy&quot;</span><span class="p">,</span> <span class="s2">&quot;类型&quot;</span><span class="o">:</span> <span class="s2">&quot;IfcRelDefinesByProperties&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;FromAttribute&quot;</span><span class="o">:</span> <span class="s2">&quot;RelatedObjects&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ToAttribute&quot;</span><span class="o">:</span> <span class="s2">&quot;RelatingPropertyDefinition&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;RelatedEntityType&quot;</span><span class="o">:</span> <span class="s2">&quot;IFCCableCarrierFitting&quot;</span>
 <span class="p">}</span>
-
-<span class="nx">算量集</span> <span class="p">{</span>
-    <span class="nx">Qset</span> <span class="o">:</span> <span class="nx">Pset_WallCommon</span><span class="p">,</span>
-    <span class="nx">Key</span> <span class="o">:</span> <span class="nx">IsExternal</span><span class="p">,</span>
-    <span class="nx">实例属性</span>
-<span class="p">}</span>
-
-<span class="nx">关系</span> <span class="p">{</span>
-    <span class="nx">Rel</span> <span class="o">:</span> <span class="nx">IsDefindBy</span> <span class="p">[</span><span class="nx">IfcRelDefinesByProperties</span><span class="p">],</span>
-    <span class="nx">FromAttribute</span> <span class="o">:</span> <span class="nx">RelatedObjects</span><span class="p">,</span>
-    <span class="nx">ToAttribute</span> <span class="o">:</span> <span class="nx">RelatingPropertyDefinition</span>
-<span class="p">}</span>
+<span class="c1">// ...</span>
 </pre></div>
 </section>
             
@@ -1866,7 +1734,47 @@ div.slide div.presenter_notes {
             </aside>
             
             <aside class="page_number">
-              5/5
+              2/3
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: index.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>性能</h2></header>
+            
+            
+            <section><p>140 万次 TemplateRule 检查：5 分钟</p>
+<ul>
+<li>构造内部数据结构 : 40 %<blockquote>
+<ul>
+<li>访问IFC属性 : 20 %</li>
+</ul>
+</blockquote>
+</li>
+<li>从内部数据结构中访问属性 : 30 %</li>
+<li>其他 : 30 %</li>
+</ul></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="index.md">index.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/3
             </aside>
           </footer>
         </div>
@@ -1882,33 +1790,21 @@ div.slide div.presenter_notes {
       <caption>Table of Contents</caption>
       
       <tr id="toc-row-1">
-        <th><a href="#slide1">Revit 接口示例</a></th>
+        <th><a href="#slide1">MVD 检查</a></th>
         <td><a href="#slide1">1</a></td>
       </tr>
       
-      
-      <tr id="toc-row-2">
-        <th><a href="#slide2">-</a></th>
-        <td><a href="#slide2">2</a></td>
-      </tr>
-      
-      
-      <tr id="toc-row-3">
-        <th><a href="#slide3">-</a></th>
-        <td><a href="#slide3">3</a></td>
-      </tr>
-      
-      
-      <tr id="toc-row-4">
-        <th><a href="#slide4">-</a></th>
-        <td><a href="#slide4">4</a></td>
-      </tr>
-      
-      
-      <tr id="toc-row-5">
-        <th><a href="#slide5">-</a></th>
-        <td><a href="#slide5">5</a></td>
-      </tr>
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">MVD 信息提取</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">性能</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
       
       
     </table>
